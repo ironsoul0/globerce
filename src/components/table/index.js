@@ -10,7 +10,7 @@ import {
   setActiveSearch,
   FETCH_LIMIT,
 } from "../../store/reducers/orderSlice";
-import { change } from "../../store/reducers/modalSlice";
+import { change, startEditMode } from "../../store/reducers/modalSlice";
 import classes from "./Table.module.css";
 import Container from "../container";
 import Spinner from "../spinner";
@@ -29,6 +29,10 @@ function Table() {
   } = useSelector((state) => state.order);
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
+
+  const handleRowClick = (id) => {
+    dispatch(startEditMode(id));
+  };
 
   const performSearch = (e) => {
     e.preventDefault();
@@ -83,6 +87,7 @@ function Table() {
             <div
               key={current.id}
               className={clsx(classes.row, classes.secondaryRow)}
+              onClick={() => handleRowClick(current.id)}
             >
               <p>{current.id}</p>
               <p>{current.name}</p>
@@ -90,22 +95,24 @@ function Table() {
               <p>{current.operator}</p>
             </div>
           ))}
-          <div className={classes.control}>
-            <button
-              disabled={currentOffset === 0}
-              className={classes.button}
-              onClick={() => dispatch(prevOrdersAsync())}
-            >
-              Предыдущие
-            </button>
-            <button
-              disabled={currentOffset + FETCH_LIMIT >= currentSize}
-              className={classes.button}
-              onClick={() => dispatch(nextOrdersAsync())}
-            >
-              Следующие
-            </button>
-          </div>
+        </div>
+      )}
+      {orders && !activeSearch && (
+        <div className={classes.control}>
+          <button
+            disabled={currentOffset === 0}
+            className={classes.button}
+            onClick={() => dispatch(prevOrdersAsync())}
+          >
+            Предыдущие
+          </button>
+          <button
+            disabled={currentOffset + FETCH_LIMIT >= currentSize}
+            className={classes.button}
+            onClick={() => dispatch(nextOrdersAsync())}
+          >
+            Следующие
+          </button>
         </div>
       )}
       {activeSearch && searchOrders && (
@@ -120,6 +127,7 @@ function Table() {
             <div
               key={current.id}
               className={clsx(classes.row, classes.secondaryRow)}
+              onClick={() => handleRowClick(current.id)}
             >
               <p>{current.id}</p>
               <p>{current.name}</p>

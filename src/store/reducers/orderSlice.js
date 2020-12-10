@@ -20,6 +20,13 @@ export const orderSlice = createSlice({
       state.currentSize++;
       state.currentOffset = 0;
     },
+    editOrder: (state, action) => {
+      const { pickedId, data } = action.payload;
+      const target = state.orders.find((order) => order.id === pickedId);
+      target.name = data.name;
+      target.status = data.status;
+      target.operator = data.operator;
+    },
     setOrders: (state, action) => {
       state.orders = action.payload;
       if (state.orders) state.currentSize = state.orders.length;
@@ -46,6 +53,7 @@ export const orderSlice = createSlice({
 
 export const {
   addOrder,
+  editOrder,
   setOrders,
   nextOrders,
   prevOrders,

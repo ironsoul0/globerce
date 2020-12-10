@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { addOrder } from "../../store/reducers/orderSlice";
+import { editOrder } from "../../store/reducers/orderSlice";
 import { change } from "../../store/reducers/modalSlice";
-import styles from "./AddOrder.module.css";
+import styles from "../addOrder/AddOrder.module.css";
 
 const fields = [
   {
@@ -26,9 +26,27 @@ const fields = [
   },
 ];
 
-function AddOrder({ isOpen }) {
+function EditOrder({ isOpen }) {
+  const { order, modal } = useSelector((state) => state);
+  const { orders } = order;
+  const { pickedId } = modal;
+
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (!orders) return;
+
+    const target = orders.find((current) => current.id === pickedId);
+
+    const current = {};
+
+    fields.forEach((field) => {
+      current[field.name] = target[field.name];
+    });
+
+    setData(current);
+  }, [orders]);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -38,7 +56,8 @@ function AddOrder({ isOpen }) {
     e.preventDefault();
 
     setData({});
-    dispatch(addOrder(data));
+
+    dispatch(editOrder({ pickedId, data }));
     dispatch(change(false));
   };
 
@@ -53,7 +72,7 @@ function AddOrder({ isOpen }) {
       onRequestClose={() => dispatch(change(false))}
       isOpen={isOpen}
     >
-      <h2>Добавление заказа</h2>
+      <h2>Редактирование заказа</h2>
       <form className={styles.form}>
         {fields.map(({ name, holder, type }) => (
           <input
@@ -66,11 +85,11 @@ function AddOrder({ isOpen }) {
           />
         ))}
         <button type="submit" onClick={handleSubmit} disabled={isInvalid()}>
-          Добавить
+          Редактировать
         </button>
       </form>
     </ReactModal>
   );
 }
 
-export default AddOrder;
+export default EditOrder;

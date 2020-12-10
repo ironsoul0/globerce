@@ -5,7 +5,7 @@
 .row {
   display: flex;
   justify-content: space-between;
-  min-width: 500px;
+  min-width: 550px;
   padding: 0px 20px;
   margin-left: -25px;
 }
