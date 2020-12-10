@@ -15,7 +15,8 @@ function index() {
       <p>
         Весь код можно найти на{" "}
         <a
-          rel="noopener norereferrer"
+          rel="noopener noreferrer"
+          target="_blank"
           href="https://github.com/ironsoul0/globerce"
         >
           Github
