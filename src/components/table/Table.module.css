@@ -1,0 +1,76 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  min-width: 500px;
+  padding: 0px 20px;
+  margin-left: -20px;
+}
+
+.mainRow {
+  font-weight: bold;
+}
+
+.secondaryRow {
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.secondaryRow:hover {
+  background-color: #eee;
+}
+
+.row p {
+  flex: 1;
+}
+
+.row p:last-of-type {
+  flex: 0.5;
+}
+
+.form input {
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  outline: none;
+  padding: 12px 0px;
+  padding-left: 15px;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #eee;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+  outline: none;
+}
+
+.form button:nth-child(3) {
+  margin-left: 15px;
+}
+
+.form button:hover {
+  opacity: 1;
+}
+
+.form {
+  margin: 33px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    overflow-x: scroll;
+  }
+
+  .secondaryRow:hover {
+    background: none;
+  }
+}
