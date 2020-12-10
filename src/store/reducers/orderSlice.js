@@ -23,6 +23,7 @@ export const orderSlice = createSlice({
     editOrder: (state, action) => {
       const { pickedId, data } = action.payload;
       const target = state.orders.find((order) => order.id === pickedId);
+      target.id = data.id;
       target.name = data.name;
       target.status = data.status;
       target.operator = data.operator;
