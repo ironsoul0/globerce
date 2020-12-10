@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import { useDispatch } from "react-redux";
 
+import { addOrder } from "../../store/reducers/orderSlice";
 import { change } from "../../store/reducers/modalSlice";
 import styles from "./AddOrder.module.css";
 
@@ -35,6 +36,9 @@ function AddOrder({ isOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setData({});
+    dispatch(addOrder(data));
     dispatch(change(false));
   };
 

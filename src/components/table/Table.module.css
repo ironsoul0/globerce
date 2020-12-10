@@ -1,9 +1,13 @@
+.root {
+  margin-bottom: 30px;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
   min-width: 500px;
   padding: 0px 20px;
-  margin-left: -20px;
+  margin-left: -25px;
 }
 
 .mainRow {
@@ -22,6 +26,7 @@
 
 .row p {
   flex: 1;
+  padding: 0 10px;
 }
 
 .row p:last-of-type {
@@ -42,7 +47,7 @@
   box-sizing: border-box;
 }
 
-.form button {
+.button {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -53,16 +58,22 @@
   outline: none;
 }
 
-.form button:nth-child(3) {
+.form .button:nth-child(3) {
   margin-left: 15px;
 }
 
-.form button:hover {
+.button:hover {
   opacity: 1;
 }
 
 .form {
   margin: 33px 0;
+}
+
+.control {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
 @media screen and (max-width: 768px) {
